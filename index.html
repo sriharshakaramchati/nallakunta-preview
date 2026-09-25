@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Nallakunta Forever — private preview</title><meta name="robots" content="noindex,nofollow,noarchive">
+<title>Nallakunta Forever</title>
 <style>
   *, *::before, *::after { box-sizing: border-box; }
   html, body {
@@ -515,43 +515,9 @@
 <script type="importmap">
 {"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.180.0/build/three.module.js","three/addons/":"https://cdn.jsdelivr.net/npm/three@0.180.0/examples/jsm/"}}
 </script>
-  
+  <script type="module" crossorigin src="./index-BhDWuOCO.js"></script>
 </head>
 <body>
   <canvas id="view"></canvas>
-
-<div id="gate" style="position:fixed;inset:0;z-index:99;display:grid;place-items:center;background:#1d1712;font-family:'Segoe UI',system-ui,sans-serif;color:#f3e8d2;">
-  <form id="gate-form" style="text-align:center;max-width:320px;width:calc(100vw - 48px)">
-    <div style="font-size:13px;letter-spacing:.14em;opacity:.7;margin-bottom:10px">PRIVATE PREVIEW</div>
-    <h1 style="font-size:26px;margin:0 0 4px">Nallakunta Forever</h1>
-    <div style="font-size:13px;opacity:.65;margin-bottom:22px">Take the long way home.</div>
-    <input id="gate-pass" type="password" placeholder="preview password" autocomplete="current-password"
-      style="width:100%;padding:11px 14px;border-radius:9px;border:1px solid #6b5a44;background:#2a221a;color:#f3e8d2;font-size:15px;outline:none;margin-bottom:10px" />
-    <button type="submit" style="width:100%;padding:11px 14px;border-radius:9px;border:0;background:#c8842a;color:#1d1712;font-weight:700;font-size:15px;cursor:pointer">Unlock</button>
-    <div id="gate-msg" style="min-height:20px;font-size:13px;color:#e08a6a;margin-top:10px"></div>
-  </form>
-</div>
-<script>
-(function() {
-  var WANT = "b8f86686285964733cf740f3d79c040e4847ac3b91c425d7a5144c06a62bb479";
-  var SRC = "./index-BhDWuOCO.js";
-  var form = document.getElementById('gate-form');
-  form.addEventListener('submit', async function(e) {
-    e.preventDefault();
-    var v = document.getElementById('gate-pass').value;
-    var msg = document.getElementById('gate-msg');
-    try {
-      var buf = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(v));
-      var hex = Array.from(new Uint8Array(buf)).map(function(b) { return b.toString(16).padStart(2, '0'); }).join('');
-      if (hex !== WANT) { msg.textContent = 'wrong password'; return; }
-      var sc = document.createElement('script');
-      sc.type = 'module'; sc.crossOrigin = true; sc.src = SRC;
-      document.body.appendChild(sc);
-      document.getElementById('gate').remove();
-    } catch (err) { msg.textContent = 'this preview needs a modern browser'; }
-  });
-  document.getElementById('gate-pass').focus();
-})();
-</script>
 </body>
 </html>
